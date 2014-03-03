@@ -28,7 +28,10 @@ unless packages.empty?
   end
 end
 
-gem_package 'rake'
+gem_package 'rake' do
+  action :install
+  not_if { %x(ruby -e 'print RUBY_VERSION') >= "2.0.0" }
+end
 
 gem_package 'passenger' do
   action     :install
